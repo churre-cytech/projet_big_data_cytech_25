@@ -51,3 +51,5 @@ minio-data
 
 ### Hadoop ###
 hadoop
+.metals/
+data/raw/*.parquet
