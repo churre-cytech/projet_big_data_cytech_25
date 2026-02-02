@@ -69,7 +69,7 @@ services:
     image: minio/minio:RELEASE.2025-09-07T16-13-09Z
     ports:
       - '9000:9000'  # Changed from 9000 to avoid HDFS conflict
-      - '9001:9001'
+      - '9002:9001' # Value changed because conflict on working station
     #   volumes:
     #     - ./minio-data:/data
     environment:
