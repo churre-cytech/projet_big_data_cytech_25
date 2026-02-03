@@ -79,6 +79,42 @@ services:
     networks:
       - spark-network
 
+  # PostgreSQL
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    environment:
+      POSTGRES_USER: bigdata
+      POSTGRES_PASSWORD: bigdata123
+      POSTGRES_DB: bigdata_dwh
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - spark-network
+
+  # pgAdmin
+  pgadmin:
+    image: dpage/pgadmin4:8
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@local.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - spark-network
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
 networks:
   spark-network:
     driver: bridge
+
+volumes:
+  pgdata:
+  pgadmin_data:
+

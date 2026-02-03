@@ -58,3 +58,9 @@ Install :
 Verifs : 
 `python --version`
 `pip --version`
+
+
+# Bonnes pratiques pour dev sous VSCode
+`sbt ~compile` : compile seulement en boucle automatique, verifie que le code build correctement des que save du fichier *(arret : Ctrl+C)*
+ `sbt ~test` : execution des tests unitaires -> tout ce qui est dans `src/test/scala` *(arret : Ctrl+C)*
+`sbt run` : compile + execution du programme
