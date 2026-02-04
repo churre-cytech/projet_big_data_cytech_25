@@ -48,12 +48,13 @@ build/
 .bsp/
 .metals/
 .bloop/
+project/.bloop/
 .scala-build/
 project/metals.sbt
 project/project/metals.sbt
 
 ### Minio ###
-minio-data
+minio-data/
 
 ### Hadoop ###
 hadoop

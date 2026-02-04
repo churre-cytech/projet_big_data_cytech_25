@@ -5,6 +5,11 @@ JOIN dim_vendor v ON f.vendor_id = v.vendor_id
 GROUP BY v.vendor_name
 ORDER BY total_revenue DESC;
 
+-- Check how many lines per vendor
+SELECT vendor_id, COUNT(*) 
+FROM fact_trip 
+GROUP BY vendor_id;
+
 -- Average trip distance by ratecode
 SELECT r.ratecode_name, AVG(f.trip_distance) AS avg_distance
 FROM fact_trip f
@@ -19,5 +24,6 @@ JOIN dim_payment p ON f.payment_type_id = p.payment_type_id
 GROUP BY p.payment_type_name
 ORDER BY trip_count DESC;
 
-
-
+-- Average distance per trip
+SELECT AVG(trip_distance) AS avg_trip_distance
+FROM fact_trip;

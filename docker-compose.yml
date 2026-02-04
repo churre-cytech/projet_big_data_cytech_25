@@ -70,8 +70,8 @@ services:
     ports:
       - '9000:9000'  # Changed from 9000 to avoid HDFS conflict
       - '9002:9001' # Value changed because conflict on working station
-    #   volumes:
-    #     - ./minio-data:/data
+    volumes:
+        - ./minio-data:/data
     environment:
       MINIO_ROOT_USER: minio
       MINIO_ROOT_PASSWORD: minio123
