@@ -108,9 +108,9 @@ object Main {
 
     def main(args: Array[String]): Unit = {
         val sourceUrl = "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2025-05.parquet"
-        val endpoint = "http://localhost:9000"
-        val accessKey = "minio"
-        val secretKey = "minio123"
+        val endpoint  = sys.env.getOrElse("MINIO_ENDPOINT", "http://localhost:9000")
+        val accessKey = sys.env.getOrElse("MINIO_ACCESS_KEY", "minio")
+        val secretKey = sys.env.getOrElse("MINIO_SECRET_KEY", "minio123")
         val bucketName = "nyc-raw"
         val objectName = "yellow_tripdata_2025-05.parquet"
         val localPath = "../data/raw/yellow_tripdata_2025-05.parquet"

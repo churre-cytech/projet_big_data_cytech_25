@@ -1,0 +1,20 @@
+[2026-02-06T17:31:32.870+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-02-06T17:31:32.879+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: tp_bigdata_pipeline.wait_services manual__2026-02-06T17:31:29.851131+00:00 [queued]>
+[2026-02-06T17:31:32.883+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: tp_bigdata_pipeline.wait_services manual__2026-02-06T17:31:29.851131+00:00 [queued]>
+[2026-02-06T17:31:32.884+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2026-02-06T17:31:32.902+0000] {taskinstance.py:2888} INFO - Executing <Task(BashOperator): wait_services> on 2026-02-06 17:31:29.851131+00:00
+[2026-02-06T17:31:32.905+0000] {standard_task_runner.py:72} INFO - Started process 119 to run task
+[2026-02-06T17:31:32.908+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'tp_bigdata_pipeline', 'wait_services', 'manual__2026-02-06T17:31:29.851131+00:00', '--job-id', '69', '--raw', '--subdir', 'DAGS_FOLDER/airflow_pipeline.py', '--cfg-path', '/tmp/tmpcys53a84']
+[2026-02-06T17:31:32.909+0000] {standard_task_runner.py:105} INFO - Job 69: Subtask wait_services
+[2026-02-06T17:31:32.947+0000] {task_command.py:467} INFO - Running <TaskInstance: tp_bigdata_pipeline.wait_services manual__2026-02-06T17:31:29.851131+00:00 [running]> on host 4d21249f976f
+[2026-02-06T17:31:33.010+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='tp_bigdata_pipeline' AIRFLOW_CTX_TASK_ID='wait_services' AIRFLOW_CTX_EXECUTION_DATE='2026-02-06T17:31:29.851131+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-02-06T17:31:29.851131+00:00'
+[2026-02-06T17:31:33.010+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2026-02-06T17:31:33.024+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-02-06T17:31:33.025+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n        until curl -sf http://minio:9000/minio/health/live > /dev/null; do sleep 2; done\n        until pg_isready -h postgres -U bigdata -d bigdata_dwh > /dev/null; do sleep 2; done\n        ']
+[2026-02-06T17:31:33.031+0000] {subprocess.py:86} INFO - Output:
+[2026-02-06T17:31:33.091+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-02-06T17:31:33.109+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2026-02-06T17:31:33.110+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=tp_bigdata_pipeline, task_id=wait_services, run_id=manual__2026-02-06T17:31:29.851131+00:00, execution_date=20260206T173129, start_date=20260206T173132, end_date=20260206T173133
+[2026-02-06T17:31:33.164+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2026-02-06T17:31:33.181+0000] {taskinstance.py:3900} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-02-06T17:31:33.191+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

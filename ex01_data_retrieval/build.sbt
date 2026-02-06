@@ -39,3 +39,23 @@ run / javaOptions ++= Seq(
   // "--add-exports=java.base/sun.util.calendar=ALL-UNNAMED",
   "-Dlog4j.configurationFile=src/main/resources/log4j2.properties"
 )
+
+assembly / mainClass := Some("fr.cytech.retrieval.Main")
+assembly / assemblyJarName := "ex01-retrieval-assembly.jar"
+assembly / test := {}
+
+assembly / assemblyMergeStrategy := {
+  case PathList("META-INF", "services", xs @ _*) =>
+    MergeStrategy.filterDistinctLines
+  case PathList("META-INF", "MANIFEST.MF") =>
+    MergeStrategy.discard
+  case PathList("META-INF", xs @ _*)
+      if xs.exists(x => x.toLowerCase.endsWith(".sf") || x.toLowerCase.endsWith(".dsa") || x.toLowerCase.endsWith(".rsa")) =>
+    MergeStrategy.discard
+  case PathList("META-INF", "versions", _ @ _*) =>
+    MergeStrategy.discard
+  case PathList("module-info.class") =>
+    MergeStrategy.discard
+  case _ =>
+    MergeStrategy.first
+}

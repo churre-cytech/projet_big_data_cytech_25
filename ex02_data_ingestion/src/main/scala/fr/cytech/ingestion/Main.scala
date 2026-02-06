@@ -31,13 +31,27 @@ object Main {
 
 
     def main(args: Array[String]) = {
-        val minioEndpoint = "http://localhost:9000"
-        val minioAccessKey = "minio"
-        val minioSecretKey = "minio123"
-        val rawBucket = "nyc-raw"
-        val cleanBucket = "nyc-clean"
-        val rawParquetPath = s"s3a://$rawBucket/yellow_tripdata_2025-05.parquet"
-        val cleanParquetPath = s"s3a://$cleanBucket/yellow_tripdata_2025-05_clean.parquet"
+        // ############### Runtime configuration (local defaults, env override for Airflow) ###############
+        val minioEndpoint = sys.env.getOrElse("MINIO_ENDPOINT", "http://localhost:9000")
+        val minioAccessKey = sys.env.getOrElse("MINIO_ACCESS_KEY", "minio")
+        val minioSecretKey = sys.env.getOrElse("MINIO_SECRET_KEY", "minio123")
+
+        val rawBucket = sys.env.getOrElse("RAW_BUCKET", "nyc-raw")
+        val cleanBucket = sys.env.getOrElse("CLEAN_BUCKET", "nyc-clean")
+        val rawObject = sys.env.getOrElse("RAW_OBJECT", "yellow_tripdata_2025-05.parquet")
+        val cleanObject = sys.env.getOrElse("CLEAN_OBJECT", "yellow_tripdata_2025-05_clean.parquet")
+
+        val pgHost = sys.env.getOrElse("PG_HOST", "localhost")
+        val pgPort = sys.env.getOrElse("PG_PORT", "5432")
+        val pgDatabase = sys.env.getOrElse("PG_DATABASE", "bigdata_dwh")
+        val pgUser = sys.env.getOrElse("PG_USER", "bigdata")
+        val pgPassword = sys.env.getOrElse("PG_PASSWORD", "bigdata123")
+
+        val taxiZoneLookupPath = sys.env.getOrElse("TAXI_ZONE_LOOKUP_PATH", "src/main/resources/taxi_zone_lookup.csv")
+
+        val rawParquetPath = s"s3a://$rawBucket/$rawObject"
+        val cleanParquetPath = s"s3a://$cleanBucket/$cleanObject"
+        val jdbcUrl = s"jdbc:postgresql://$pgHost:$pgPort/$pgDatabase"
 
         // ############### Initialization SparkSession ###############
         val spark: SparkSession = SparkSession
@@ -96,10 +110,9 @@ object Main {
         // ############### Branch 2 : transformations Minio/Spark -> Postgres Datamart  ###############
 
         // Connection to Spark -> Postgres (JDBC)
-        val jdbcUrl = "jdbc:postgresql://localhost:5432/bigdata_dwh"
         val jdbcProperties = new java.util.Properties()
-        jdbcProperties.setProperty("user", "bigdata")
-        jdbcProperties.setProperty("password", "bigdata123")
+        jdbcProperties.setProperty("user", pgUser)
+        jdbcProperties.setProperty("password", pgPassword)
         jdbcProperties.setProperty("driver", "org.postgresql.Driver")
 
         // Test connection
@@ -142,7 +155,6 @@ object Main {
         
         // ###### Loading taxi_zone_lookup.csv to populate dim_location columns (borough, zone, service_zone) 
         // -> (extend the analysis)
-        val taxiZoneLookupPath: String = "src/main/resources/taxi_zone_lookup.csv"
         val dfTaxiZoneLookupRaw: DataFrame = spark.read
             .option("header", "true")
             .option("inferSchema", "true")

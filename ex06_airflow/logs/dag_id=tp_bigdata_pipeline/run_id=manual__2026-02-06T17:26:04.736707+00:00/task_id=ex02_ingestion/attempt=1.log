@@ -1,0 +1,137 @@
+[2026-02-06T17:27:21.226+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-02-06T17:27:21.235+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: tp_bigdata_pipeline.ex02_ingestion manual__2026-02-06T17:26:04.736707+00:00 [queued]>
+[2026-02-06T17:27:21.241+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: tp_bigdata_pipeline.ex02_ingestion manual__2026-02-06T17:26:04.736707+00:00 [queued]>
+[2026-02-06T17:27:21.241+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2026-02-06T17:27:21.259+0000] {taskinstance.py:2888} INFO - Executing <Task(BashOperator): ex02_ingestion> on 2026-02-06 17:26:04.736707+00:00
+[2026-02-06T17:27:21.262+0000] {standard_task_runner.py:72} INFO - Started process 238 to run task
+[2026-02-06T17:27:21.265+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'tp_bigdata_pipeline', 'ex02_ingestion', 'manual__2026-02-06T17:26:04.736707+00:00', '--job-id', '66', '--raw', '--subdir', 'DAGS_FOLDER/airflow_pipeline.py', '--cfg-path', '/tmp/tmpyiue2v2v']
+[2026-02-06T17:27:21.266+0000] {standard_task_runner.py:105} INFO - Job 66: Subtask ex02_ingestion
+[2026-02-06T17:27:21.307+0000] {task_command.py:467} INFO - Running <TaskInstance: tp_bigdata_pipeline.ex02_ingestion manual__2026-02-06T17:26:04.736707+00:00 [running]> on host 4d21249f976f
+[2026-02-06T17:27:21.366+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='tp_bigdata_pipeline' AIRFLOW_CTX_TASK_ID='ex02_ingestion' AIRFLOW_CTX_EXECUTION_DATE='2026-02-06T17:26:04.736707+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-02-06T17:26:04.736707+00:00'
+[2026-02-06T17:27:21.367+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2026-02-06T17:27:21.379+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-02-06T17:27:21.380+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -euo pipefail\n            test -f /workspace/ex02_data_ingestion/target/scala-2.13/ex02-ingestion-assembly.jar\n            java --add-exports=java.base/sun.nio.ch=ALL-UNNAMED             --add-exports=java.base/sun.util.calendar=ALL-UNNAMED             -jar /workspace/ex02_data_ingestion/target/scala-2.13/ex02-ingestion-assembly.jar\n        ']
+[2026-02-06T17:27:21.386+0000] {subprocess.py:86} INFO - Output:
+[2026-02-06T17:27:21.843+0000] {subprocess.py:93} INFO - WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+[2026-02-06T17:27:21.887+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized format specifier [d]
+[2026-02-06T17:27:21.887+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized conversion specifier [d] starting at position 16 in conversion pattern.
+[2026-02-06T17:27:21.888+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized format specifier [thread]
+[2026-02-06T17:27:21.888+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized conversion specifier [thread] starting at position 25 in conversion pattern.
+[2026-02-06T17:27:21.888+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized format specifier [level]
+[2026-02-06T17:27:21.888+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized conversion specifier [level] starting at position 35 in conversion pattern.
+[2026-02-06T17:27:21.889+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized format specifier [logger]
+[2026-02-06T17:27:21.889+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized conversion specifier [logger] starting at position 47 in conversion pattern.
+[2026-02-06T17:27:21.889+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized format specifier [msg]
+[2026-02-06T17:27:21.889+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized conversion specifier [msg] starting at position 54 in conversion pattern.
+[2026-02-06T17:27:21.889+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized format specifier [n]
+[2026-02-06T17:27:21.889+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized conversion specifier [n] starting at position 56 in conversion pattern.
+[2026-02-06T17:27:21.899+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized format specifier [d]
+[2026-02-06T17:27:21.899+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized conversion specifier [d] starting at position 16 in conversion pattern.
+[2026-02-06T17:27:21.899+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized format specifier [thread]
+[2026-02-06T17:27:21.899+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized conversion specifier [thread] starting at position 25 in conversion pattern.
+[2026-02-06T17:27:21.899+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized format specifier [level]
+[2026-02-06T17:27:21.899+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized conversion specifier [level] starting at position 35 in conversion pattern.
+[2026-02-06T17:27:21.899+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized format specifier [logger]
+[2026-02-06T17:27:21.900+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized conversion specifier [logger] starting at position 47 in conversion pattern.
+[2026-02-06T17:27:21.900+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized format specifier [msg]
+[2026-02-06T17:27:21.900+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized conversion specifier [msg] starting at position 54 in conversion pattern.
+[2026-02-06T17:27:21.900+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized format specifier [n]
+[2026-02-06T17:27:21.900+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized conversion specifier [n] starting at position 56 in conversion pattern.
+[2026-02-06T17:27:22.095+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized format specifier [d]
+[2026-02-06T17:27:22.095+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized conversion specifier [d] starting at position 16 in conversion pattern.
+[2026-02-06T17:27:22.095+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized format specifier [thread]
+[2026-02-06T17:27:22.095+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized conversion specifier [thread] starting at position 25 in conversion pattern.
+[2026-02-06T17:27:22.095+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized format specifier [level]
+[2026-02-06T17:27:22.095+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized conversion specifier [level] starting at position 35 in conversion pattern.
+[2026-02-06T17:27:22.095+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized format specifier [logger]
+[2026-02-06T17:27:22.095+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized conversion specifier [logger] starting at position 47 in conversion pattern.
+[2026-02-06T17:27:22.095+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized format specifier [msg]
+[2026-02-06T17:27:22.096+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized conversion specifier [msg] starting at position 54 in conversion pattern.
+[2026-02-06T17:27:22.096+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized format specifier [n]
+[2026-02-06T17:27:22.096+0000] {subprocess.py:93} INFO - ERROR StatusLogger Unrecognized conversion specifier [n] starting at position 56 in conversion pattern.
+[2026-02-06T17:27:22.096+0000] {subprocess.py:93} INFO - Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+[2026-02-06T17:27:33.699+0000] {subprocess.py:93} INFO - Exception in thread "main" org.apache.spark.sql.AnalysisException: [PATH_NOT_FOUND] Path does not exist: file:/tmp/airflowtmp5kj8o905/src/main/resources/taxi_zone_lookup.csv.
+[2026-02-06T17:27:33.700+0000] {subprocess.py:93} INFO - 	at org.apache.spark.sql.errors.QueryCompilationErrors$.dataPathNotExistError(QueryCompilationErrors.scala:1499)
+[2026-02-06T17:27:33.700+0000] {subprocess.py:93} INFO - 	at org.apache.spark.sql.execution.datasources.DataSource$.$anonfun$checkAndGlobPathIfNecessary$4(DataSource.scala:757)
+[2026-02-06T17:27:33.700+0000] {subprocess.py:93} INFO - 	at org.apache.spark.sql.execution.datasources.DataSource$.$anonfun$checkAndGlobPathIfNecessary$4$adapted(DataSource.scala:754)
+[2026-02-06T17:27:33.700+0000] {subprocess.py:93} INFO - 	at org.apache.spark.util.ThreadUtils$.$anonfun$parmap$2(ThreadUtils.scala:384)
+[2026-02-06T17:27:33.700+0000] {subprocess.py:93} INFO - 	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:691)
+[2026-02-06T17:27:33.700+0000] {subprocess.py:93} INFO - 	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:500)
+[2026-02-06T17:27:33.700+0000] {subprocess.py:93} INFO - 	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1395)
+[2026-02-06T17:27:33.700+0000] {subprocess.py:93} INFO - 	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373)
+[2026-02-06T17:27:33.700+0000] {subprocess.py:93} INFO - 	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182)
+[2026-02-06T17:27:33.700+0000] {subprocess.py:93} INFO - 	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655)
+[2026-02-06T17:27:33.701+0000] {subprocess.py:93} INFO - 	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622)
+[2026-02-06T17:27:33.701+0000] {subprocess.py:93} INFO - 	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165)
+[2026-02-06T17:28:23.726+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2026-02-06T17:28:23.733+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/bash.py", line 249, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2026-02-06T17:28:23.737+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=tp_bigdata_pipeline, task_id=ex02_ingestion, run_id=manual__2026-02-06T17:26:04.736707+00:00, execution_date=20260206T172604, start_date=20260206T172721, end_date=20260206T172823
+[2026-02-06T17:28:23.754+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2026-02-06T17:28:23.754+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 66 for task ex02_ingestion (Bash command failed. The command returned a non-zero exit code 1.; 238)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 115, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3004, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3158, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3182, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/bash.py", line 249, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2026-02-06T17:28:23.762+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2026-02-06T17:28:23.774+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-02-06T17:28:23.785+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
