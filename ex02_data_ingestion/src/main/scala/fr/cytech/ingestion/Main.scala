@@ -3,29 +3,59 @@ package fr.cytech.ingestion
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.functions._
-import org.apache.spark.sql.catalyst.dsl.ExpressionConversions
+
+import io.minio.{BucketExistsArgs, MakeBucketArgs, MinioClient}
+
 
 object Main {
+
+    // This helper creates the bucket path once before writing to MinIO.
+    def ensureBucket(
+        endpoint: String,
+        accessKey: String,
+        secretKey: String,
+        bucketName: String
+    ): Unit = {
+        val minio = MinioClient.builder()
+            .endpoint(endpoint)
+            .credentials(accessKey, secretKey)
+            .build()
+
+        val exists = minio.bucketExists(
+            BucketExistsArgs.builder().bucket(bucketName).build()
+        )
+        if (!exists) {
+            minio.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build())
+        }
+    }
+
+
     def main(args: Array[String]) = {
+        val minioEndpoint = "http://localhost:9000"
+        val minioAccessKey = "minio"
+        val minioSecretKey = "minio123"
+        val rawBucket = "nyc-raw"
+        val cleanBucket = "nyc-clean"
+        val rawParquetPath = s"s3a://$rawBucket/yellow_tripdata_2025-05.parquet"
+        val cleanParquetPath = s"s3a://$cleanBucket/yellow_tripdata_2025-05_clean.parquet"
 
         // ############### Initialization SparkSession ###############
         val spark: SparkSession = SparkSession
             .builder()
             .appName("ex02_data_ingestion")
             .master("local[*]")
-            .config("spark.hadoop.fs.s3a.endpoint","http://localhost:9000")
-            .config("spark.hadoop.fs.s3a.access.key","minio") // FS S3A Access Key
-            .config("spark.hadoop.fs.s3a.secret.key","minio123") // FS S3A Secret Key
+            .config("spark.hadoop.fs.s3a.endpoint", minioEndpoint)
+            .config("spark.hadoop.fs.s3a.access.key", minioAccessKey) // FS S3A Access Key
+            .config("spark.hadoop.fs.s3a.secret.key", minioSecretKey) // FS S3A Secret Key
             .config("spark.hadoop.fs.s3a.path.style.access", "true")
             .config("spark.hadoop.fs.s3a.connection.ssl.enabled", "false") // FS S3A connection ssl enabled
             .getOrCreate()
-        import spark.implicits._
 
         // Printing for test
         // println("Hello, world")
 
         // ############### Loading raw file.parquet ###############
-        val df: DataFrame = spark.read.parquet("s3a://nyc-raw/yellow_tripdata_2025-05.parquet")
+        val df: DataFrame = spark.read.parquet(rawParquetPath)
         // df.printSchema()
         // df.show(20)
         
@@ -54,10 +84,13 @@ object Main {
         // dfClean.select("PULocationID", "DOLocationID")
         //     .show(20, truncate = false)
 
-        // Writing file_clean.parquet to Minio bucket (local/nyc-clean need to exist, else: mc mb local/nyc-clean in terminal)
+
+        // Create nyc-clean bucket if missing before writing cleaned parquet
+        ensureBucket(minioEndpoint, minioAccessKey, minioSecretKey, cleanBucket)
+        // Write file_clean.parquet to MinIO bucket
         dfClean.write
             .mode("overwrite")
-            .parquet("s3a://nyc-clean/yellow_tripdata_2025-05_clean.parquet")
+            .parquet(cleanParquetPath)
 
 
         // ############### Branch 2 : transformations Minio/Spark -> Postgres Datamart  ###############

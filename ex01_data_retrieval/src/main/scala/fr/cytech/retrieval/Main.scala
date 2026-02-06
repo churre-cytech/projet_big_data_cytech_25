@@ -8,8 +8,7 @@ import io.minio.{BucketExistsArgs, MakeBucketArgs, MinioClient, PutObjectArgs}
 
 object Main {
 
-
-
+    // This helper creates the bucket path once before writing to MinIO.
     def ensureBucket(
         endpoint: String,
         accessKey: String,

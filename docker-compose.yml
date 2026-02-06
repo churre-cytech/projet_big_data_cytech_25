@@ -94,7 +94,7 @@ services:
     networks:
       - spark-network
 
-  # pgAdmin
+  # pgAdmin (not used in this project)
   pgadmin:
     image: dpage/pgadmin4:8
     container_name: pgadmin
@@ -110,6 +110,30 @@ services:
     volumes:
       - pgadmin_data:/var/lib/pgadmin
 
+  # Airflow
+  airflow:
+    image: apache/airflow:2.10.2
+    container_name: airflow
+    user: "${AIRFLOW_UID:-50000}:0"
+    environment:
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: sqlite:////opt/airflow/airflow.db
+      _AIRFLOW_WWW_USER_USERNAME: admin
+      _AIRFLOW_WWW_USER_PASSWORD: admin123
+    volumes:
+      - ./ex06_airflow/dags:/opt/airflow/dags
+      - ./ex06_airflow/logs:/opt/airflow/logs
+      - ./ex06_airflow/plugins:/opt/airflow/plugins
+      - ./:/workspace
+    ports:
+      - "8085:8080"
+    networks:
+      - spark-network
+    command: standalone
+
+    
 networks:
   spark-network:
     driver: bridge
